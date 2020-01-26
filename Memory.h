@@ -3,9 +3,9 @@
 #include <vector>
 
 class Memory {
-    std::size_t mem_size;
-    std::vector<unsigned char> mem_repr;
-    std::vector<unsigned char>::iterator p_cntr;
+    std::size_t mem_size_;
+    std::vector<unsigned char> mem_repr_;
+    std::vector<unsigned char>::iterator p_cntr_;
 
 public:
     Memory(std::size_t);
