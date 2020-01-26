@@ -1,11 +1,11 @@
 #include <iostream>
 #include <bits/unique_ptr.h>
 #include "Memory.h"
-#include "block/headers/Instr.h"
-#include "block/headers/Block.h"
-#include "block/headers/InstrBlock.h"
-#include "block/headers/MultiInstrBlock.h"
-#include "block/headers/LoopBlock.h"
+#include "ast/headers/Instr.h"
+#include "ast/headers/Block.h"
+#include "ast/headers/InstrBlock.h"
+#include "ast/headers/MultiInstrBlock.h"
+#include "ast/headers/LoopBlock.h"
 
 
 std::unique_ptr<MultiInstrBlock> get_mib() {
