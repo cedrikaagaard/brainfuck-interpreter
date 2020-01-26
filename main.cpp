@@ -30,7 +30,7 @@ int main() {
 
 
     LoopBlock lb(mib);
-    
+
     int i = 25;
 
     while (lb.has_nxt_instr(i)) {
