@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "../headers/LoopBlock.h"
 
 LoopBlock::LoopBlock(std::unique_ptr<MultiInstrBlock> &multiInstrBlock) {
@@ -7,11 +8,13 @@ LoopBlock::LoopBlock(std::unique_ptr<MultiInstrBlock> &multiInstrBlock) {
 
 bool LoopBlock::has_nxt_instr(const unsigned char &cv) {
     if (is_bgn_ && cv == 0) {
+        std::cout << "false1" << std::endl;
         return false;
     }
 
-    if (multiInstrBlock_->has_nxt_instr(cv))
+    if (multiInstrBlock_->has_nxt_instr(cv)) {
         return true;
+    }
 
     return cv != 0;
 }
@@ -19,6 +22,9 @@ bool LoopBlock::has_nxt_instr(const unsigned char &cv) {
 Instr LoopBlock::get_nxt_instr(const unsigned char &cv) {
     if (is_bgn_ && cv == 0)
         throw std::out_of_range("No more instructions.");
+
+    if (is_bgn_ && !multiInstrBlock_->has_nxt_instr(cv))
+        return noop;
 
     if (!multiInstrBlock_->has_nxt_instr(cv) && cv != 0)
         wrap();
@@ -34,4 +40,8 @@ Instr LoopBlock::get_nxt_instr(const unsigned char &cv) {
 void LoopBlock::wrap() {
     is_bgn_ = true;
     multiInstrBlock_->rst();
+}
+
+void LoopBlock::rst() {
+    // TODO: implement
 }
