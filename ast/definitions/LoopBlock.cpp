@@ -8,7 +8,6 @@ LoopBlock::LoopBlock(std::unique_ptr<MultiInstrBlock> &multiInstrBlock) {
 
 bool LoopBlock::has_nxt_instr(const unsigned char &cv) {
     if (is_bgn_ && cv == 0) {
-        std::cout << "false1" << std::endl;
         return false;
     }
 
@@ -43,5 +42,6 @@ void LoopBlock::wrap() {
 }
 
 void LoopBlock::rst() {
-    // TODO: implement
+    is_bgn_ = true;
+    multiInstrBlock_->rst();
 }

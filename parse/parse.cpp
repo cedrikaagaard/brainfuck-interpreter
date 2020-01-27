@@ -33,7 +33,7 @@ Parser::parse_instr(std::string::iterator &it) {
             break;
 
         default:
-            throw new std::invalid_argument("Invalid token");
+            instr = noop;
     }
 
     std::unique_ptr<InstrBlock> block(new InstrBlock(instr));
@@ -52,12 +52,12 @@ Parser::parse_mult_instr(std::string::iterator &it) {
             it = std::next(it);
 
             std::unique_ptr<Block> nestedLoopBlock = parse_loop(it);
-            (*instrs).add_block(nestedLoopBlock);
+            instrs->add_block(nestedLoopBlock);
         }
 
         else {
             std::unique_ptr<Block> block = parse_instr(it);
-            (*instrs).add_block(block);
+            instrs->add_block(block);
         }
     }
 
@@ -77,7 +77,7 @@ std::unique_ptr<LoopBlock> Parser::parse_loop(std::string::iterator &it) {
             it = std::next(it);
 
             std::unique_ptr<Block> nestedLoopBlock = parse_loop(it);
-            (*instrs).add_block(nestedLoopBlock);
+            instrs->add_block(nestedLoopBlock);
         }
 
         else if (*it == ']') {
@@ -87,7 +87,7 @@ std::unique_ptr<LoopBlock> Parser::parse_loop(std::string::iterator &it) {
 
         else {
             std::unique_ptr<Block> block = parse_instr(it);
-            (*instrs).add_block(block);
+            instrs->add_block(block);
         }
     }
 
